@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Task;
+use App\Models\Url;
+use Illuminate\Support\Facades\Log;
 
 class TasksController extends Controller
 {
@@ -27,6 +29,15 @@ class TasksController extends Controller
         $task->description = $request->description;
         $task->user_id = auth()->user()->id;
         $task->save();
+
+        // $url = new Url();
+        // $url->url = $request->url;
+        // $url->task_id = auth()->user()->task()->id;
+        // $url->save();
+
+        var_dump($request->url);
+        Log::info($request->url);
+
         return redirect('/dashboard'); 
     }
 
