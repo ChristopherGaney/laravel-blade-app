@@ -35,8 +35,11 @@ class TasksController extends Controller
         // $url->task_id = auth()->user()->task()->id;
         // $url->save();
 
-        var_dump($request->url);
+        Log::info($task->id);
+        
+        Log::info('word');
         Log::info($request->url);
+        
 
         return redirect('/dashboard'); 
     }
