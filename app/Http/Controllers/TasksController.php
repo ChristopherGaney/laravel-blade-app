@@ -30,10 +30,10 @@ class TasksController extends Controller
         $task->user_id = auth()->user()->id;
         $task->save();
 
-        // $url = new Url();
-        // $url->url = $request->url;
-        // $url->task_id = auth()->user()->task()->id;
-        // $url->save();
+        $url = new Url();
+        $url->url = $request->url;
+        $url->task_id = $task->id;//auth()->user()->task()->id;
+        $url->save();
 
         Log::info($task->id);
         
