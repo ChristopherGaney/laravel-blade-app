@@ -6,13 +6,34 @@ use Illuminate\Http\Request;
 
 use App\Models\Task;
 use App\Models\Url;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TasksController extends Controller
 {
     public function index()
     {
-        $tasks = auth()->user()->tasks();
+
+        $user_id = auth()->user()->id;
+        //$tarray = [];
+        $tasks = DB::table('tasks')->where('user_id', $user_id)->get();
+        $tsks = compact('tasks');
+        foreach($tsks['tasks'] as $tsk => $t) {
+            //array_push($tarray, $t->id);
+            $urls = DB::table('urls')->where('task_id', $t->id)->get();
+            //array_push($tarray, $urls);
+            $tsks['tasks'][$tsk]->urls = $urls;
+        }
+        //$urls = DB::table('urls')->where('user_id', $user_id)->get();
+        //$tasks = auth()->user()->tasks();
+        
+        
+        //var_dump($tsks['tasks'][1]);
+        // foreach($tsks['tasks'] as $t) {
+        //     array_push($tarray, $t);
+        // }
+        var_dump($tarray);
+        //var_dump(compact('tasks'));
         return view('dashboard', compact('tasks'));
     }
     public function add()

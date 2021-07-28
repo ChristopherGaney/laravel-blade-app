@@ -19,6 +19,7 @@
                 <thead>
                 <tr class="border-b">
                     <th class="text-left p-3 px-5">Task</th>
+                    <th class="text-left p-3 px-5">Url</th>
                     <th class="text-left p-3 px-5">Actions</th>
                     <th></th>
                 </tr>
@@ -28,6 +29,9 @@
                     <tr class="border-b hover:bg-orange-100">
                         <td class="p-3 px-5">
                             {{$task->description}}
+                        </td>
+                        <td class="p-3 px-5">
+                            {{$task->url}}
                         </td>
                         <td class="p-3 px-5">
                             
