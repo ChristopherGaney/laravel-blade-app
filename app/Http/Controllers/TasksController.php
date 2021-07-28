@@ -15,24 +15,19 @@ class TasksController extends Controller
     {
 
         $user_id = auth()->user()->id;
-        //$tarray = [];
+        $tarray = [];
         $tasks = DB::table('tasks')->where('user_id', $user_id)->get();
         $tsks = compact('tasks');
         foreach($tsks['tasks'] as $tsk => $t) {
             //array_push($tarray, $t->id);
             $urls = DB::table('urls')->where('task_id', $t->id)->get();
-            //array_push($tarray, $urls);
+            array_push($tarray, $tsk);
             $tsks['tasks'][$tsk]->urls = $urls;
         }
-        //$urls = DB::table('urls')->where('user_id', $user_id)->get();
+        
         //$tasks = auth()->user()->tasks();
         
-        
-        //var_dump($tsks['tasks'][1]);
-        // foreach($tsks['tasks'] as $t) {
-        //     array_push($tarray, $t);
-        // }
-        var_dump($tarray);
+        var_dump($tsks);
         //var_dump(compact('tasks'));
         return view('dashboard', compact('tasks'));
     }
