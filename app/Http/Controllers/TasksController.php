@@ -14,22 +14,15 @@ class TasksController extends Controller
     public function index()
     {
 
-        $user_id = auth()->user()->id;
-        $tarray = [];
-        $tasks = DB::table('tasks')->where('user_id', $user_id)->get();
-        $tsks = compact('tasks');
-        foreach($tsks['tasks'] as $tsk => $t) {
-            //array_push($tarray, $t->id);
-            $urls = DB::table('urls')->where('task_id', $t->id)->get();
-            array_push($tarray, $tsk);
-            $tsks['tasks'][$tsk]->urls = $urls;
-        }
-        
+         $user_id = auth()->user()->id;
+         $tasks = DB::table('tasks')->where('user_id', $user_id)->get();
+         $task_arr = compact('tasks');
+         foreach($task_arr['tasks'] as $tsk => $t) {
+             $urls = DB::table('urls')->where('task_id', $t->id)->get();
+             $task_arr['tasks'][$tsk]->urls = $urls;
+         }
         //$tasks = auth()->user()->tasks();
-        
-        var_dump($tsks);
-        //var_dump(compact('tasks'));
-        return view('dashboard', compact('tasks'));
+        return view('dashboard', $task_arr); //compact('tasks')
     }
     public function add()
     {
@@ -51,12 +44,6 @@ class TasksController extends Controller
         $url->task_id = $task->id;//auth()->user()->task()->id;
         $url->save();
 
-        Log::info($task->id);
-        
-        Log::info('word');
-        Log::info($request->url);
-        
-
         return redirect('/dashboard'); 
     }
 
@@ -64,7 +51,8 @@ class TasksController extends Controller
     {
 
         if (auth()->user()->id == $task->user_id)
-        {            
+        { 
+                print_r($task);           
                 return view('edit', compact('task'));
         }           
         else {

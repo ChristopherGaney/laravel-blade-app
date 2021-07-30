@@ -25,13 +25,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(auth()->user()->tasks as $task)
+                
+                @foreach($tasks as $task) 
                     <tr class="border-b hover:bg-orange-100">
                         <td class="p-3 px-5">
                             {{$task->description}}
+                            
                         </td>
                         <td class="p-3 px-5">
-                            {{$task->url}}
+                            @foreach($task->urls as $url)
+                                <span>{{$url->url}}</span>
+                            @endforeach
+
                         </td>
                         <td class="p-3 px-5">
                             
