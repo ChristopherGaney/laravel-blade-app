@@ -39,11 +39,21 @@ class TasksController extends Controller
         $task->user_id = auth()->user()->id;
         $task->save();
 
-        $url = new Url();
-        $url->url = $request->url;
-        $url->task_id = $task->id;//auth()->user()->task()->id;
-        $url->save();
-
+        for($i = 0; $i < 20;$i++) {
+            $u = 'url_' . $i;
+            if(!empty($request->$u)) {
+                $url = new Url();
+                $url->url = $request->$u;
+                $url->task_id = $task->id;//auth()->user()->task()->id;
+                $url->save();
+            }
+            else {
+                break;
+            }
+        }
+        
+        //Log::info('request url');
+        //Log::info($request->url_0);
         return redirect('/dashboard'); 
     }
 

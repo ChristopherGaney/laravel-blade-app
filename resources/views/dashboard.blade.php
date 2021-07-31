@@ -33,10 +33,11 @@
                             
                         </td>
                         <td class="p-3 px-5">
-                            @foreach($task->urls as $url)
-                                <span>{{$url->url}}</span>
-                            @endforeach
-
+                            <ul>
+                               @foreach($task->urls as $url)
+                                <li>{{$url->url}}</li>
+                               @endforeach 
+                            </ul>
                         </td>
                         <td class="p-3 px-5">
                             
