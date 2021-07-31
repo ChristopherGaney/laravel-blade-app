@@ -13,10 +13,15 @@
             <form method="POST" action="/task/{{ $task->id }}">
 
                 <div class="form-group">
-                    <textarea name="description" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$task->description }}</textarea>  
+                    <label>Description</label>
+                    <input type="text" name="description" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" value="{{$task->description }}"> 
                     @if ($errors->has('description'))
                         <span class="text-danger">{{ $errors->first('description') }}</span>
                     @endif
+                    <label>Urls</label>
+                    @foreach($task->urls as $url)
+                        <input type="text" name="url_{{$loop->index}}" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" value="{{$url->url}}">
+                   @endforeach 
                 </div>
 
                 <div class="form-group">

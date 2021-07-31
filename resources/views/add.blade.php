@@ -12,10 +12,12 @@
             <form method="POST" action="/task">
 
                 <div id="textareas" class="form-group">
+                    <label>Description</label>
                     <input type="text" name="description" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"  placeholder='Enter your task'> 
                     @if ($errors->has('description'))
                         <span class="text-danger">{{ $errors->first('description') }}</span>
                     @endif
+                    <label>Urls</label>
                     <input type="text" name="url_0" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"  placeholder='Enter your url'>
                 </div>
                 <div class="form-group">

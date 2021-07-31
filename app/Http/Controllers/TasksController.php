@@ -62,8 +62,10 @@ class TasksController extends Controller
 
         if (auth()->user()->id == $task->user_id)
         { 
-                print_r($task);           
-                return view('edit', compact('task'));
+                $task = compact('task');
+                $urls = DB::table('urls')->where('task_id', $task['task']->id)->get();
+                $task['task']->urls = $urls; 
+                return view('edit', $task);
         }           
         else {
              return redirect('/dashboard');
